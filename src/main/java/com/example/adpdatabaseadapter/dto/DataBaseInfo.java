@@ -6,13 +6,17 @@ public class DataBaseInfo {
 	String jdbcURL;
 	String userName;
 	String userPass;
-
-	public DataBaseInfo(String driverClassname,String jdbcURL,String userName,String userPass) {
+	private String companyId;
+	private String dbVersion;
+	
+	public DataBaseInfo(String driverClassname,String jdbcURL,String userName,String userPass,String companyId,String dbVersion) {
 		
 		this.driverClassname=driverClassname;
 		this.jdbcURL=jdbcURL;
 		this.userName=userName;
 		this.userPass=userPass;
+		this.setCompanyId(companyId);
+		this.setDbVersion(dbVersion);
 		
 	}
 	public String getDriverClassName() {
@@ -37,6 +41,18 @@ public class DataBaseInfo {
 
 		return userPass;
 
+	}
+	public String getDbVersion() {
+		return dbVersion;
+	}
+	public void setDbVersion(String dbVersion) {
+		this.dbVersion = dbVersion;
+	}
+	public String getCompanyId() {
+		return companyId;
+	}
+	public void setCompanyId(String companyId) {
+		this.companyId = companyId;
 	}
 
 }

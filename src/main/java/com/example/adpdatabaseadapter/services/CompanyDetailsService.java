@@ -26,15 +26,14 @@ public class CompanyDetailsService {
 	public DataBaseInfo getDatabaseDetails(String companyId) {
 		
 		if(companyId.equals("6")){
-			DataBaseInfo dbInfo= new DataBaseInfo("org.postgresql.Driver",
-					"jdbc:postgresql://localhost:5432/V5_adp", "postgres", "postgres");
+			DataBaseInfo dbInfo= new DataBaseInfo("org.postgresql.Driver","jdbc:postgresql://localhost:5432/V5_adp", "postgres", "postgres","6","V5");
 			return dbInfo;
 			
 		}
 		else if(companyId.equals("7")) {
 			
 			DataBaseInfo dbInfo= new DataBaseInfo("org.postgresql.Driver",
-					"jdbc:postgresql://localhost:5432/V6_adp", "postgres", "postgres");
+					"jdbc:postgresql://localhost:5432/V6_adp", "postgres", "postgres","7","V6");
 			return dbInfo;
 			
 		}
