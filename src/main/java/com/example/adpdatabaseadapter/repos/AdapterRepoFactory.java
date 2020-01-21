@@ -12,13 +12,13 @@ public class AdapterRepoFactory {
 	public AdapterRepository getRepositoy(String CompanyId){
 		
 		CompanyDetailsService detailsService = CompanyDetailsService.getInstance();
-		String dbBersion = detailsService.getDatabaseVersion(CompanyId);
 		DataBaseInfo databaseDetails = detailsService.getDatabaseDetails(CompanyId);
+
 		
-		if(dbBersion.equals("V5")) {			
+		if(databaseDetails.getDbVersion().equals("V5")) {			
 			return new V5_AdapterRepositoy(databaseDetails);
 		}
-		if(dbBersion.equals("V6")) {			
+		if(databaseDetails.getDbVersion().equals("V6")) {			
 			return new V6_AdapterRepository(databaseDetails);
 		}
 		return null;

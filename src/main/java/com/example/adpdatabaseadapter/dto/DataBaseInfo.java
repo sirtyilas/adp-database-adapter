@@ -2,12 +2,14 @@ package com.example.adpdatabaseadapter.dto;
 
 public class DataBaseInfo {
 	
-	String driverClassname;
-	String jdbcURL;
-	String userName;
-	String userPass;
+	private String driverClassname;
+	private String jdbcURL;
+	private String userName;
+	private String userPass;
 	private String companyId;
 	private String dbVersion;
+	
+	public DataBaseInfo() {}
 	
 	public DataBaseInfo(String driverClassname,String jdbcURL,String userName,String userPass,String companyId,String dbVersion) {
 		
@@ -53,6 +55,34 @@ public class DataBaseInfo {
 	}
 	public void setCompanyId(String companyId) {
 		this.companyId = companyId;
+	}
+
+	public String getDriverClassname() {
+		return driverClassname;
+	}
+
+	public void setDriverClassname(String driverClassname) {
+		this.driverClassname = driverClassname;
+	}
+
+	public String getJdbcURL() {
+		return jdbcURL;
+	}
+
+	public void setJdbcURL(String jdbcURL) {
+		this.jdbcURL = jdbcURL;
+	}
+
+	public String getUserPass() {
+		return userPass;
+	}
+
+	public void setUserPass(String userPass) {
+		this.userPass = userPass;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 }

@@ -1,13 +1,29 @@
 package com.example.adpdatabaseadapter.services;
 
+import org.springframework.http.HttpHeaders;
+import org.springframework.web.reactive.function.client.WebClient;
+
 import com.example.adpdatabaseadapter.dto.DataBaseInfo;
+
+import reactor.core.publisher.Mono;
 
 public class CompanyDetailsService {
 	
 
 	private static CompanyDetailsService companyDetailsService;
+    private final WebClient webClient;
+    private static final String API_MIME_TYPE = "application/json";
+    private static final String API_BASE_URL = "http://localhost:8086/";
+    private static final String USER_AGENT = "ADP database connector";
 	
-	private CompanyDetailsService() {}
+	private CompanyDetailsService() {
+		
+		 this.webClient = WebClient.builder()
+	                .baseUrl(API_BASE_URL)
+	                .defaultHeader(HttpHeaders.CONTENT_TYPE, API_MIME_TYPE)
+	                .defaultHeader(HttpHeaders.USER_AGENT, USER_AGENT)
+	                .build();		
+	}
 	
 	
 	public static CompanyDetailsService getInstance() {
@@ -16,47 +32,19 @@ public class CompanyDetailsService {
 			
 			companyDetailsService = new CompanyDetailsService();
 		}
-		return companyDetailsService;
-		
+		return companyDetailsService;		
 		
 	}
 	
 	
 	
-	public DataBaseInfo getDatabaseDetails(String companyId) {
-		
-		if(companyId.equals("6")){
-			DataBaseInfo dbInfo= new DataBaseInfo("org.postgresql.Driver","jdbc:postgresql://localhost:5432/V5_adp", "postgres", "postgres","6","V5");
-			return dbInfo;
-			
-		}
-		else if(companyId.equals("7")) {
-			
-			DataBaseInfo dbInfo= new DataBaseInfo("org.postgresql.Driver",
-					"jdbc:postgresql://localhost:5432/V6_adp", "postgres", "postgres","7","V6");
-			return dbInfo;
-			
-		}
-		return null;
-		
-		
+	public DataBaseInfo getDatabaseDetails(String companyId) {		
+
+		Mono<DataBaseInfo> map = webClient.get().uri("/details/database/"+companyId).retrieve().bodyToMono(DataBaseInfo.class);
+		return map.block();		
 		
 	}
 
 
-	public String getDatabaseVersion(String companyId) {
-		
-		if(companyId.equals("6")){
-		// TODO Auto-generated method stub
-		return "V5";
-		
-		}
-		else if(companyId.equals("7")) {
-			
-			return "V6";
-			
-		}
-		return null;
-	}
 
 }
